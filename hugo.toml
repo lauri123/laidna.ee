@@ -1,3 +1,96 @@
-baseURL = 'https://example.org/'
-locale = 'en-us'
-title = 'My New Hugo Project'
+baseURL = "https://laidna.ee/"
+languageCode = "en"
+DefaultContentLanguage = "en"
+title = "laidna.ee"
+author = "Lauri Laidna"
+copyright = "© Lauri Laidna"
+enableInlineShortcodes = true
+enableRobotsTXT = true
+
+# Prevents build failures from Hugo's deprecated remote-JSON shortcodes.
+ignoreErrors = ["error-remote-getjson"]
+
+[module]
+  [[module.imports]]
+    path = "github.com/lauri123/risotto"
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  noindex = false
+
+[params.theme]
+  palette = "gruvbox-dark"
+
+# Sidebar: about/bio
+[params.about]
+  title = "laidna.ee"
+  description = "Homelab, electronics, 3D printing and other things I take apart."
+  logo = "🧰"
+
+# Sidebar: social links
+[[params.socialLinks]]
+  icon = "fa-brands fa-github"
+  title = "GitHub"
+  url = "https://github.com/lauri123"
+
+[menu]
+
+  [[menu.main]]
+    identifier = "smart-home"
+    name = "Smart Home"
+    url = "/smart-home/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "electronics"
+    name = "DIY Electronics"
+    url = "/electronics/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "3d-printing"
+    name = "3D Printing & Modelling"
+    url = "/3d-printing/"
+    weight = 30
+
+  [[menu.main]]
+    identifier = "dev-ai"
+    name = "Development & AI"
+    url = "/dev-ai/"
+    weight = 40
+
+  [[menu.main]]
+    identifier = "homelab"
+    name = "Homelab"
+    url = "/homelab/"
+    weight = 50
+
+  [[menu.main]]
+    identifier = "rc-drones"
+    name = "RC & Drones"
+    url = "/rc-drones/"
+    weight = 60
+
+  [[menu.main]]
+    identifier = "travel"
+    name = "Travelling"
+    url = "/travel/"
+    weight = 70
+
+# Enable inline HTML in Markdown (required by risotto)
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = true
+
+[markup.highlight]
+  style = "gruvbox"
+  noClasses = false
+
+[privacy.youtube]
+  privacyEnhanced = true
