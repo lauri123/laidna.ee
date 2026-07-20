@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build in the exact pinned image the server uses — same `docker run`
+      # shape as deploy.sh, so CI and production cannot diverge. Deliberately
+      # NOT a `container:` job: that image has no Node, and a container job
+      # needs Node for actions/checkout. Running the build as a docker step
+      # keeps checkout on the host runner (which has Node) and sidesteps that
+      # entirely. This is a cold build (no warm module cache), so it also
+      # independently proves a clean checkout resolves the theme module.
+      - name: Build site in the pinned Hugo image
+        run: |
+          docker run --rm -v "$PWD:/src" -w /src \
+            hugomods/hugo:debian-dart-sass-go-git-0.164.0 \
+            hugo --minify --gc
+
+      - name: Fail if nothing was produced
+        run: test -s public/index.html
