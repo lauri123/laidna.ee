@@ -1,5 +1,5 @@
 baseURL = "https://laidna.ee/"
-languageCode = "en"
+locale = "en"
 DefaultContentLanguage = "en"
 title = "laidna.ee"
 author = "Lauri Laidna"
