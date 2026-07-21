@@ -7,6 +7,9 @@
     <title>Content Manager — laidna.ee</title>
   </head>
   <body>
-    <script src="https://unpkg.com/@sveltia/cms@0.172.1/dist/sveltia-cms.js" type="module"></script>
+    <!-- Plain script, NOT type="module": the dist/sveltia-cms.js bundle is an
+         IIFE, and Sveltia auto-initialises only when loaded as a non-module
+         script. (The .mjs build is the one for type="module".) -->
+    <script src="https://unpkg.com/@sveltia/cms@0.172.1/dist/sveltia-cms.js"></script>
   </body>
 </html>
