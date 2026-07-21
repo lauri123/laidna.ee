@@ -1,0 +1,18 @@
+{{ define "main" }}
+{{/* No literal "#" — the theme's CSS adds it via h1:before. */}}
+<h1>404</h1>
+
+<p>
+  <code>cat {{ .Page.RelPermalink }}</code><br>
+  <code>cat: no such file or directory</code>
+</p>
+
+<p>
+  That page isn't here. It may have been renamed, or it may never have
+  existed. The sections in the nav above are the whole site &mdash; start there.
+</p>
+
+<p>
+  <a href="{{ "" | absURL }}">&larr; back to the front page</a>
+</p>
+{{ end }}

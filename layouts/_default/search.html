@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{/* No literal "#" in the heading — the theme's CSS adds it via h1:before. */}}
+<h1>{{ .Title }}</h1>
+
+<link href="{{ "pagefind/pagefind-ui.css" | absURL }}" rel="stylesheet">
+<link href="{{ "css/search.css" | absURL }}" rel="stylesheet">
+<script src="{{ "pagefind/pagefind-ui.js" | absURL }}"></script>
+
+<div id="search"></div>
+
+<script src="{{ "js/search-init.js" | absURL }}"></script>
+{{ end }}

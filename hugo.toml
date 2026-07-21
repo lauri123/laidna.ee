@@ -79,6 +79,12 @@ ignoreErrors = ["error-remote-getjson"]
     url = "/travel/"
     weight = 70
 
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 80
+
 # Enable inline HTML in Markdown (required by risotto)
 [markup.goldmark.renderer]
   unsafe = true

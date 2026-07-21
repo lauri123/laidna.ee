@@ -1,0 +1,41 @@
+/* Pagefind's default UI ships light-themed, which is dark-on-dark and nearly
+   unreadable here. Map its theming variables onto the theme's base16 custom
+   properties rather than hardcoding gruvbox, so the search UI follows
+   automatically if the palette is ever switched. */
+:root {
+  --pagefind-ui-primary: var(--base0B);
+  --pagefind-ui-text: var(--base06);
+  --pagefind-ui-background: var(--base00);
+  --pagefind-ui-border: var(--base02);
+  --pagefind-ui-tag: var(--base01);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 2px;
+  --pagefind-ui-font: inherit;
+}
+
+/* The search box itself: match the terminal look of the rest of the site. */
+.pagefind-ui__search-input {
+  background-color: var(--base01);
+  color: var(--base06);
+}
+
+.pagefind-ui__search-input::placeholder {
+  color: var(--base03);
+}
+
+/* Result titles read as links elsewhere on the site; keep that consistent. */
+.pagefind-ui__result-link {
+  color: var(--base0B);
+}
+
+.pagefind-ui__result-excerpt {
+  color: var(--base05);
+}
+
+/* Pagefind highlights matches with <mark>; the default yellow-on-yellow is
+   illegible against this palette. */
+.pagefind-ui__result-excerpt mark,
+mark {
+  background-color: var(--base0A);
+  color: var(--base00);
+}
