@@ -1,0 +1,11 @@
+# {{ site.Title }}
+
+> {{ (default dict site.Params.about).description }}
+
+{{ trim .RawContent "\n" }}
+{{ range site.Sections }}{{ if .RegularPagesRecursive }}
+## {{ .Title }}
+{{ range .RegularPagesRecursive.ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.summary }}: {{ . }}{{ end }}
+{{- end }}
+{{ end }}{{ end }}

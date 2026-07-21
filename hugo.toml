@@ -1,9 +1,8 @@
 baseURL = "https://laidna.ee/"
-locale = "en"
 DefaultContentLanguage = "en"
 title = "laidna.ee"
-author = "Lauri Laidna"
 copyright = "© Lauri Laidna"
+timeZone = "Europe/Tallinn"
 enableInlineShortcodes = true
 enableRobotsTXT = true
 
@@ -17,8 +16,34 @@ ignoreErrors = ["error-remote-getjson"]
 [pagination]
   pagerSize = 10
 
+# Explicit single-language block. `label` is what the footer's `$ echo $LANG`
+# prints; without it the prompt echoes an empty string.
+[languages.en]
+  label = "en_US.UTF-8"
+  locale = "en"
+
+# Tags only. Hugo's default also generates a `categories` taxonomy, which
+# nothing here uses — it rendered an empty /categories/ page into the sitemap.
+[taxonomies]
+  tag = "tags"
+
+# /llms.txt — a machine-readable index for AI crawlers (llmstxt.org), rendered
+# from layouts/index.llms.txt so it stays current with the content.
+[outputFormats.llms]
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+
+[outputs]
+  home = ["html", "rss", "llms"]
+
 [params]
   noindex = false
+
+# The name/email map form Hugo's internal templates expect now that the
+# site-level `author` key is gone.
+[params.author]
+  name = "Lauri Laidna"
 
 [params.theme]
   palette = "gruvbox-dark"
