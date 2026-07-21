@@ -9,7 +9,17 @@
   <body>
     <!-- Plain script, NOT type="module": the dist/sveltia-cms.js bundle is an
          IIFE, and Sveltia auto-initialises only when loaded as a non-module
-         script. (The .mjs build is the one for type="module".) -->
-    <script src="https://unpkg.com/@sveltia/cms@0.172.1/dist/sveltia-cms.js"></script>
+         script. (The .mjs build is the one for type="module".)
+
+         integrity + crossorigin because this is the one page a GitHub write
+         token is pasted into — a version pin alone would not survive a CDN
+         compromise or an unpkg hijack. Fails closed: if the bytes ever differ
+         from this hash the script simply does not run. Recompute on any version
+         bump: curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A -->
+    <script
+      src="https://unpkg.com/@sveltia/cms@0.172.1/dist/sveltia-cms.js"
+      integrity="sha384-ITPqKJWlZnytrVwEWWompVPzObjemua5YuLqAxwk0IPEgWymRZM0gczfQnqwWfwY"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
   </body>
 </html>
