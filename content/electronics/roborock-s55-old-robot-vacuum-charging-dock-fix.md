@@ -4,7 +4,7 @@ date = "2026-07-22T00:01:00+03:00"
 draft = false
 tags = []
 summary = ""
-cover = "/images/pasted-image-1784669534330.png"
+cover = "/images/pasted-image-1784669534330.jpg"
 +++
 
 Our old robot vacuum was in household room and somehow it got a bit wet and it went unnoticed. Water creeped up the dock via capillary action. PSU board got hevily damaged. 
@@ -15,10 +15,10 @@ Hotglued the USB power board on the original PSU-board. Sometimes things just wo
 
 Total time: opened dock on shelf after diagnosis - months. Actual fix after realising the solution - about 30 minutes.
 
-![](/images/pasted-image-1784669477056.png "Water damage to PCB")
+![](/images/pasted-image-1784669477056.jpg "Water damage to PCB")
 
-![](/images/pasted-image-1784669422205.png "Water damage to PCB")
+![](/images/pasted-image-1784669422205.jpg "Water damage to PCB")
 
-![](/images/pasted-image-1784669534330.png "Damaged PSU (230VAC > DC 20V 1.8A) out, USB Type-C power board in")
+![](/images/pasted-image-1784669534330.jpg "Damaged PSU (230VAC > DC 20V 1.8A) out, USB Type-C power board in")
 
-![](/images/pasted-image-1784669639532.png "Hotglued the USB power board on the original PSU-board. Sometimes things just work out!")
+![](/images/pasted-image-1784669639532.jpg "Hotglued the USB power board on the original PSU-board. Sometimes things just work out!")

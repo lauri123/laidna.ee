@@ -6,6 +6,18 @@ backend:
 media_folder: static/images
 public_folder: /images
 
+# Re-encode every uploaded/pasted raster image in the browser before commit.
+# JPEG (not webp/avif) so saved copies open anywhere; the canvas re-encode also
+# strips EXIF (GPS, camera) — otherwise a direct file upload keeps it verbatim.
+media_libraries:
+  all:
+    transformations:
+      raster_image:
+        format: jpeg
+        quality: 85
+        width: 4000
+        height: 4000
+
 publish_mode: simple
 
 _field_defs: &post_fields
