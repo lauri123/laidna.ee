@@ -1,0 +1,83 @@
+backend:
+  name: github
+  repo: lauri123/laidna.ee
+  branch: main
+
+media_folder: static/images
+public_folder: /images
+
+publish_mode: simple
+
+_field_defs: &post_fields
+  - { label: "Title", name: "title", widget: "string" }
+  - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
+  - { label: "Draft", name: "draft", widget: "boolean", default: true }
+  - { label: "Tags", name: "tags", widget: "list", default: [], required: false }
+  - { label: "Summary", name: "summary", widget: "string", required: false }
+  - { label: "Cover image", name: "cover", widget: "image", required: false }
+  - { label: "Body", name: "body", widget: "markdown" }
+
+collections:
+  - name: smart-home
+    label: "Smart Home"
+    folder: content/smart-home
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: electronics
+    label: "DIY Electronics"
+    folder: content/electronics
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: 3d-printing
+    label: "3D Printing & Modelling"
+    folder: content/3d-printing
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: dev-ai
+    label: "Development & AI"
+    folder: content/dev-ai
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: homelab-proxmox
+    label: "Homelab — Proxmox"
+    folder: content/homelab/proxmox
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: homelab-networking
+    label: "Homelab — Networking"
+    folder: content/homelab/networking
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: rc-drones
+    label: "RC & Drones"
+    folder: content/rc-drones
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
+
+  - name: travel
+    label: "Travelling"
+    folder: content/travel
+    create: true
+    slug: "{{slug}}"
+    format: toml-frontmatter
+    fields: *post_fields
