@@ -1,0 +1,8 @@
+{{- /* Markdown images (the Sveltia paste flow writes captions into the title:
+       ![](/images/x.jpg "caption") — kept as a tooltip, matching the old
+       default rendering). */ -}}
+{{- partial "responsive-image.html" (dict
+      "src" (string .Destination)
+      "alt" (or .PlainText .Title "")
+      "title" .Title
+      "eager" (eq .Ordinal 0)) -}}

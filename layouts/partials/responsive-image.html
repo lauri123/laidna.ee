@@ -1,0 +1,55 @@
+{{- /* Emits an <img> with srcset/sizes, intrinsic width/height (no layout
+       shift) and lazy loading for any site image referenced as /images/<file>
+       (i.e. living in assets/images). Anything else — external URL, SVG/GIF,
+       missing file — falls back to a plain <img>.
+
+       Args (dict): src (required), alt, title, eager (bool — the first image
+       on a page loads eagerly so a potential LCP image is never lazy). */ -}}
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $title := .title -}}
+{{- $eager := .eager -}}
+{{- $res := "" -}}
+{{- if strings.HasPrefix $src "/images/" -}}
+  {{- $res = resources.Get (strings.TrimPrefix "/" $src) -}}
+  {{- if not $res -}}
+    {{- warnf "responsive-image: %q not found under assets/ — emitting a plain <img> that will 404" $src -}}
+  {{- end -}}
+{{- end -}}
+{{- if and $res (in (slice "jpeg" "png" "webp" "tiff") $res.MediaType.SubType) -}}
+  {{- /* 1504 = 2x the theme's 47rem content column; nothing wider is ever
+         displayed inline, so larger originals are linked instead. */ -}}
+  {{- $cap := 1504 -}}
+  {{- $variants := slice -}}
+  {{- range $w := slice 480 752 1024 $cap -}}
+    {{- if lt $w $res.Width -}}
+      {{- $variants = $variants | append ($res.Resize (printf "%dx" $w)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if le $res.Width $cap -}}{{- $variants = $variants | append $res -}}{{- end -}}
+  {{- $fallback := index $variants 0 -}}
+  {{- range $variants -}}{{- if le .Width 1024 -}}{{- $fallback = . -}}{{- end -}}{{- end -}}
+  {{- $srcset := slice -}}
+  {{- range $variants -}}{{- $srcset = $srcset | append (printf "%s %dw" .RelPermalink .Width) -}}{{- end -}}
+  {{- $full := gt $res.Width $cap -}}
+  {{- if $full }}<a href="{{ $res.RelPermalink }}">{{ end -}}
+  <img src="{{ $fallback.RelPermalink }}"
+    srcset="{{ delimit $srcset ", " }}"
+    sizes="(min-width: 64rem) 47rem, (min-width: 45rem) calc(100vw - 17rem), calc(100vw - 2rem)"
+    width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+    alt="{{ $alt }}"
+    {{- with $title }} title="{{ . }}"{{ end }}
+    {{- if not $eager }} loading="lazy"{{ end }} decoding="async">
+  {{- if $full }}</a>{{ end -}}
+{{- else if $res -}}
+  {{- /* Exists as an asset but is not worth resizing (SVG, GIF): publish and
+         serve the original. */ -}}
+  <img src="{{ $res.RelPermalink }}" alt="{{ $alt }}"
+    {{- if ne $res.MediaType.SubType "svg" }} width="{{ $res.Width }}" height="{{ $res.Height }}"{{ end }}
+    {{- with $title }} title="{{ . }}"{{ end }}
+    {{- if not $eager }} loading="lazy"{{ end }} decoding="async">
+{{- else -}}
+  <img src="{{ $src | safeURL }}" alt="{{ $alt }}"
+    {{- with $title }} title="{{ . }}"{{ end }}
+    {{- if not $eager }} loading="lazy"{{ end }} decoding="async">
+{{- end -}}

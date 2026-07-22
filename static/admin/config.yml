@@ -3,7 +3,9 @@ backend:
   repo: lauri123/laidna.ee
   branch: main
 
-media_folder: static/images
+# assets/ (not static/) so Hugo's asset pipeline can generate the responsive
+# srcset variants — a file in static/images would be served full-size only.
+media_folder: assets/images
 public_folder: /images
 
 # Re-encode every uploaded/pasted raster image in the browser before commit.

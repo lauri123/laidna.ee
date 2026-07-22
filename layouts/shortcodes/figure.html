@@ -1,0 +1,24 @@
+{{- /* Override of Hugo's built-in figure: same markup, but the <img> goes
+       through the responsive-image partial so assets/images files get srcset.
+       Supports src/alt/class/title/caption/attr/attrlink — the subset used on
+       this site; the built-in's link/target/rel params are intentionally
+       dropped (the partial links large images to their original itself). */ -}}
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+  {{- partial "responsive-image.html" (dict
+        "src" (.Get "src")
+        "alt" (or (.Get "alt") (.Get "caption") "")
+        "eager" (eq .Ordinal 0)) }}
+  {{- if or (.Get "title") (.Get "caption") (.Get "attr") }}
+  <figcaption>
+    {{- with .Get "title" }}<h4>{{ . }}</h4>{{ end -}}
+    {{- if or (.Get "caption") (.Get "attr") -}}
+    <p>
+      {{- .Get "caption" | markdownify -}}
+      {{- with .Get "attrlink" }}<a href="{{ . }}">{{ end -}}
+      {{- .Get "attr" | markdownify -}}
+      {{- if .Get "attrlink" }}</a>{{ end -}}
+    </p>
+    {{- end -}}
+  </figcaption>
+  {{- end }}
+</figure>

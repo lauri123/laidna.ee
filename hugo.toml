@@ -37,6 +37,12 @@ ignoreErrors = ["error-remote-getjson"]
 [outputs]
   home = ["html", "rss", "llms"]
 
+# Defaults for the responsive-image partial's Resize calls. Box (the Hugo
+# default) leaves downscaled photos soft; quality matches the Sveltia pipeline.
+[imaging]
+  quality = 85
+  resampleFilter = "Lanczos"
+
 [params]
   noindex = false
 
