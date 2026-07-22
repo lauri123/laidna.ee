@@ -12,6 +12,11 @@
   cover-driven og:image — resolved via resources.Get and resized to 1200px when the
   cover is under `/images/` — Pagefind markers, per-page SEO head — descriptions/
   canonical/JSON-LD — and tag links in the post aside).
+- No Font Awesome / no CDN assets: icons are inline SVGs (fork `partials/icon.html`,
+  matched by substring, globe fallback) and CSS ships as one minified fingerprinted
+  bundle (fork css lives in `assets/`, concatenated in `partials/head.html`).
+  The live CSP has no `'unsafe-inline'` — a `style=""` attribute anywhere in a
+  layout is silently blocked; use a class in the bundle instead.
 - After ANY change to the fork, repin: `./dev.sh mod get -u github.com/lauri123/risotto@main`.
   A plain `mod get -u` silently resolves to inherited upstream tag v0.5.1 and freezes the theme.
 - Theme CSS prepends `#` to every h1 — never write a literal `#` in a layout heading.
