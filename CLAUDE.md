@@ -19,6 +19,9 @@
   layout is silently blocked; use a class in the bundle instead.
 - After ANY change to the fork, repin: `./dev.sh mod get -u github.com/lauri123/risotto@main`.
   A plain `mod get -u` silently resolves to inherited upstream tag v0.5.1 and freezes the theme.
+- Read fork source without cloning:
+  `~/.cache/laidna-hugo/modules/filecache/modules/pkg/mod/github.com/lauri123/risotto@<ver>/`.
+  To change it: clone `git@github.com:lauri123/risotto.git`, push, repin.
 - Theme CSS prepends `#` to every h1 — never write a literal `#` in a layout heading.
 
 ## Content rules
@@ -50,7 +53,11 @@
   and serve on that same port.
 
 ## Deploy
+- `git pull` before any work — Sveltia commits to main from the browser, so the local
+  clone is often behind (a new post may exist only on GitHub).
 - Push to `main` — the server polls and rebuilds within ~2 min. There is no manual deploy.
+- The server builds with `--minify` (local `./dev.sh --gc` does not): live HTML drops
+  attribute quotes, so greps against production must not assume `attr="value"`.
 - Browser editing at `/admin` (Sveltia) commits to this same repo; both paths converge on main.
 - Search is Pagefind, indexed server-side at deploy. Its index is WebAssembly, so any CSP
   must include `'wasm-unsafe-eval'` or search silently returns zero results.
